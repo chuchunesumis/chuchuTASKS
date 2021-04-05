@@ -26,10 +26,10 @@ exports.crearProyecto = async (req, res) => {
     }
 }
 
-// Obtiene todos los proyectos según el grupo al que forma parte el usuario actual
+// Obtiene todos los proyectos del usuario actual
 exports.obtenerProyectos = async (req, res) => {
     try {
-        const proyectos = await Proyecto.find({ grupo: req.usuario.grupo });
+        const proyectos = await Proyecto.find({ creador: req.usuario.id });
         res.json({ proyectos })
     } catch (error) {
         console.log(error);
