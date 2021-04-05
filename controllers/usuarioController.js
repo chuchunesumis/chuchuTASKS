@@ -27,6 +27,9 @@ exports.crearUsuario = async (req, res) => {
         // Hashear el password
         const salt = await bcryptjs.genSalt(10);
         usuario.password = await bcryptjs.hash(password, salt);
+
+        // 24h adicionales a la fecha de hoy para almacenar el tiempo de caducidad de la sesión
+        usuario.sesion = Math.floor(Date.now() + 86400000);
         
         // guardar usuario
         await usuario.save();
